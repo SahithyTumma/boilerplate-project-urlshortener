@@ -29,6 +29,10 @@ let urls = {}
 app.post('/api/shorturl', function(req, res) {
   const url = req.body.url;
   console.log(url);
+  const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+  if (!urlRegex.test(url)) {
+    return res.json({ error: 'invalid url' });
+  }
   // console.log(req.url);
   const shorturl = 1;
   urls[shorturl] = url;
